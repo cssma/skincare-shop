@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧴 Skincare Shop
+# Skincare Shop
 
 *E-commerce web application for skincare products*
 
