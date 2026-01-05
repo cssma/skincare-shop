@@ -1,0 +1,9 @@
+# Static / vendor assets – do not count as main language
+wwwroot/lib/** linguist-vendored
+wwwroot/bootstrap/** linguist-vendored
+wwwroot/mobirise/** linguist-vendored
+wwwroot/theme/** linguist-vendored
+wwwroot/web/** linguist-vendored
+wwwroot/images/** linguist-vendored
+
+
