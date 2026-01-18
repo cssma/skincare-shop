@@ -1,16 +1,21 @@
 namespace KoreanSkincareShop.Data;
 
 using KoreanSkincareShop.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-public class SkincareShopDbContext : DbContext
+public class SkincareShopDbContext : IdentityDbContext<IdentityUser>
 {
     public SkincareShopDbContext(DbContextOptions<SkincareShopDbContext> options) : base(options)
     {
         
     }
     
-    public DbSet<Product> Products { get; set; }
+    public DbSet<Product> Products { get; set; } 
+    public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderDetail> OrderDetails { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -19,7 +24,7 @@ public class SkincareShopDbContext : DbContext
 
             new Product
             {
-                Id = 1,
+                Id = 1, 
                 Name = "Mediheal Cica AC Calming Sleeping Mask",
                 Details = "Overnight calming mask with cica and niacinamide that helps reduce irritation and restore skin balance.",
                 Price = 12.99m,
