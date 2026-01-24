@@ -16,7 +16,6 @@ public class ShoppingCartController : Controller
     public IActionResult Index()
     {
         var items = shoppingCartRepository.GetShoppingCartItems();
-        shoppingCartRepository.ShoppingCartItems = items;
         ViewBag.CartTotal = shoppingCartRepository.GetShoppingCartTotal();
         return View(items);
     }

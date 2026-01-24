@@ -2,6 +2,6 @@ namespace KoreanSkincareShop.Models.Interfaces;
 
 public interface IOrderRepository
 {
-    void PlaceOrder(Order order);
-    
+    Task<Order> PlaceOrderAsync(Order order);
+    Task<Order?> GetOrderByIdAsync(int orderId);
 }

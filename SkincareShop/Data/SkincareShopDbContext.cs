@@ -16,10 +16,18 @@ public class SkincareShopDbContext : IdentityDbContext<IdentityUser>
     public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderDetail> OrderDetails { get; set; }
+    public DbSet<Payment> Payments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.Entity<Payment>()
+            .HasOne(p => p.Order)
+            .WithMany()
+            .HasForeignKey(p => p.OrderId)
+            .OnDelete(DeleteBehavior.Restrict);
+        
         modelBuilder.Entity<Product>().HasData(
 
             new Product

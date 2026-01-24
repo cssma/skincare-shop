@@ -1,0 +1,138 @@
+@model int
+
+@{
+    ViewData["Title"] = "Select Payment Method";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">💳 Select Payment Method</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <strong>Order #@ViewBag.OrderId</strong>
+                        <p class="mb-0">Please select your preferred payment method to complete your order.</p>
+                    </div>
+
+                    <form asp-action="Process" asp-controller="Payment" method="post">
+                        <input type="hidden" name="orderId" value="@ViewBag.OrderId" />
+
+                        <div class="payment-methods">
+                            <!-- Credit Card -->
+                            <div class="form-check payment-option mb-3 p-3 border rounded">
+                                <input class="form-check-input" type="radio" name="paymentMethod" 
+                                       id="creditCard" value="0" checked>
+                                <label class="form-check-label w-100" for="creditCard">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-credit-card fs-2 me-3 text-primary"></i>
+                                        <div>
+                                            <strong>Credit Card</strong>
+                                            <p class="text-muted mb-0 small">Visa, Mastercard, American Express</p>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Debit Card -->
+                            <div class="form-check payment-option mb-3 p-3 border rounded">
+                                <input class="form-check-input" type="radio" name="paymentMethod" 
+                                       id="debitCard" value="1">
+                                <label class="form-check-label w-100" for="debitCard">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-wallet2 fs-2 me-3 text-success"></i>
+                                        <div>
+                                            <strong>Debit Card</strong>
+                                            <p class="text-muted mb-0 small">Direct payment from your bank account</p>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- PayPal -->
+                            <div class="form-check payment-option mb-3 p-3 border rounded">
+                                <input class="form-check-input" type="radio" name="paymentMethod" 
+                                       id="paypal" value="2">
+                                <label class="form-check-label w-100" for="paypal">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-paypal fs-2 me-3 text-info"></i>
+                                        <div>
+                                            <strong>PayPal</strong>
+                                            <p class="text-muted mb-0 small">Pay securely with your PayPal account</p>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Bank Transfer -->
+                            <div class="form-check payment-option mb-3 p-3 border rounded">
+                                <input class="form-check-input" type="radio" name="paymentMethod" 
+                                       id="bankTransfer" value="3">
+                                <label class="form-check-label w-100" for="bankTransfer">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-bank fs-2 me-3 text-warning"></i>
+                                        <div>
+                                            <strong>Bank Transfer</strong>
+                                            <p class="text-muted mb-0 small">Direct transfer from your bank</p>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- BLIK (Polish payment) -->
+                            <div class="form-check payment-option mb-3 p-3 border rounded">
+                                <input class="form-check-input" type="radio" name="paymentMethod" 
+                                       id="blik" value="4">
+                                <label class="form-check-label w-100" for="blik">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-phone fs-2 me-3 text-danger"></i>
+                                        <div>
+                                            <strong>BLIK</strong>
+                                            <p class="text-muted mb-0 small">Fast mobile payment (Polish banks)</p>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="bi bi-lock-fill me-2"></i>Proceed to Payment
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <a asp-controller="Orders" asp-action="Checkout" class="text-muted">
+                            <i class="bi bi-arrow-left"></i> Back to Order
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 text-center text-muted">
+                <small>
+                    <i class="bi bi-shield-check"></i> Your payment information is secure and encrypted
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .payment-option {
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .payment-option:hover {
+        background-color: #f8f9fa;
+        border-color: #0d6efd !important;
+    }
+    
+    .payment-option input:checked ~ label {
+        font-weight: bold;
+    }
+</style>

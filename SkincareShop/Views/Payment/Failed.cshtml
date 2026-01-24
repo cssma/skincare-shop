@@ -1,0 +1,94 @@
+@model KoreanSkincareShop.Models.Payment
+
+@{
+    ViewData["Title"] = "Payment Failed";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-danger">
+                <div class="card-header bg-danger text-white text-center">
+                    <i class="bi bi-x-circle-fill" style="font-size: 3rem;"></i>
+                    <h2 class="mt-3 mb-0">Payment Failed</h2>
+                </div>
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <p class="lead">We couldn't process your payment.</p>
+                        <p class="text-muted">Don't worry, you have not been charged.</p>
+                    </div>
+
+                    <div class="alert alert-danger">
+                        <h6><i class="bi bi-exclamation-triangle-fill me-2"></i>Reason for failure:</h6>
+                        <p class="mb-0"><strong>@Model.FailureReason</strong></p>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h6 class="text-muted">ORDER NUMBER</h6>
+                            <h4>#@Model.OrderId</h4>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="text-muted">ATTEMPTED AMOUNT</h6>
+                            <h4>@Model.Amount.ToString("C")</h4>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h6 class="text-muted">PAYMENT METHOD</h6>
+                            <p>@Model.PaymentMethod</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="text-muted">STATUS</h6>
+                            <span class="badge bg-danger fs-6">@Model.Status</span>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="alert alert-info">
+                        <h6><i class="bi bi-lightbulb-fill me-2"></i>Common solutions:</h6>
+                        <ul class="mb-0">
+                            <li>Check that your card details are correct</li>
+                            <li>Ensure you have sufficient funds</li>
+                            <li>Try a different payment method</li>
+                            <li>Contact your bank if the problem persists</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <a asp-controller="Payment" asp-action="SelectMethod" 
+                           asp-route-orderId="@Model.OrderId" 
+                           class="btn btn-danger btn-lg">
+                            <i class="bi bi-arrow-repeat me-2"></i>Try Again
+                        </a>
+                        <a asp-controller="ShoppingCart" asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                            <i class="bi bi-cart-fill me-2"></i>Back to Cart
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <p class="text-muted">
+                    Still having issues? <a href="#">Contact Support</a> - We're here to help!
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card-header i {
+        animation: shakeFail 0.5s ease-in-out;
+    }
+    
+    @@keyframes shakeFail {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+    }
+</style>

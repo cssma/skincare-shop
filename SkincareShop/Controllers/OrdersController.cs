@@ -23,12 +23,12 @@ public class OrdersController : Controller
     }
     
     [HttpPost]
-    public IActionResult Checkout(Order order)
+    public async Task<IActionResult> Checkout(Order order)
     {
-        orderRepository.PlaceOrder(order);
+        await orderRepository.PlaceOrderAsync(order);
         shopCartRepository.ClearCart();
         HttpContext.Session.SetInt32("CartCount", 0);
-        return RedirectToAction("CheckoutComplete");
+        return RedirectToAction("SelectMethod", "Payment", new { orderId = order.Id });
     }
 
     public IActionResult CheckoutComplete()
